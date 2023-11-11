@@ -1,9 +1,10 @@
 class Star_Cinema:
-    def __init__(self) -> None:
-        self._hall_list =[]
+     # Class Attribute 
+    __hall_list = []
 
     def entry_hall(self,hall):
-        self._hall_list.append(hall)
+        self.__hall_list.append(hall)
+
 
 class Hall(Star_Cinema):
     def __init__(self,rows,cols,hallNo) -> None:
@@ -13,25 +14,20 @@ class Hall(Star_Cinema):
         self._seats     = {}
         self._show_List = []
 
-        self.my_hall = rows,cols,hallNo
+        self.my_hall = (rows,cols,hallNo)
         self.entry_hall(self.my_hall)
     
-    def entry_show(self,id,movie_name,time):
-        self._id = id 
-        self._movie_name = movie_name
-        self._time = time 
+    def entry_show(self,id,movie_Name,time):
+        self._id = id
+        self._movie_Name = movie_Name
+        self._time = time            
+        enter_show = (self._id,self._movie_Name,self._time)
+        self._show_List.append(enter_show)
 
-        movie_info = (id,movie_name,time)
-        self.show_List.append(movie_info)
+        self.seats = [[0 for i in range(self._cols)] for j in range(self._rows)]
+        self._seats[self._id] = self.seats #Make a key with id to the attribute seats and value will be the 2d list.
 
-        self.seats =[]
-        for i in range(self.rows):
-            row = []
-            for j in range(self.cols):
-                row.append(0)
-            self.seats.append(row)
-
-        self._seats[self._id] = self.seats
+# This work for the Q.No:4
 
     def book_seats(self,id,seatsForBooking):
         try:
@@ -40,8 +36,8 @@ class Hall(Star_Cinema):
                 if id  == show[0]:
                     get = True
                     break
-            if get ==True:
-                raise ValueError("Id not found")
+            if not get:
+                raise ValueError("Id not get")
             for single_set in seatsForBooking:
                 row,col = single_set
 
@@ -67,24 +63,32 @@ class Hall(Star_Cinema):
              print(f"\n{show[1]} is Available on ID:({show[0]}) On {show[2]}\n")
 
     def view_available_seats(self,show_id):
-        get = False
-        for show in self._show_List:
-            if id  == show[0]:
-                get = True
-                break
-        if get ==True:
-            raise ValueError("Id not found")
-        self.BookingId = self._seats[show_id]
-        for r in range (0,self._rows)
+        try:
+            get = False
+            for show in self._show_List:
+                if show_id == show[0]:
+                    get = True
+                    break
+            if not get:
+                raise ValueError("Id not get for the Show")
+            self.BookingId = self._seats[show_id]
+            for r in range(0,self._rows):
+                for c in range(0,self._cols):
+                    print(self.BookingId[r][c],end=' ')
+                print()
+        except ValueError as e:
+            print()
+            print(f"Error is : {e} ,  Please Provide valid information \n")
+
+
+            
         
 
 
+AnandaCinemaHall  = Hall(8,8,1110)
+AnandaCinemaHall.entry_show("101","Buktafitta jay" ,"11.00 AM")
+AnandaCinemaHall.entry_show("110","Bedar maye josna","12.00 PM")
+AnandaCinemaHall.entry_show("111","Bostir chayle Pocha ", "1.00 Am")
+AnandaCinemaHall.entry_show("1000","Murder 2.O ", "2.0 AM")
 
-
-
-my_hall2 = Hall(3,3,3232)
-
-hallSets = my_hall2._seats
-
-for set in hallSets:
-    print(set)
+AnandaCinemaHall.view_available_seats(1010)
