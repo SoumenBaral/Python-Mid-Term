@@ -1,25 +1,43 @@
 class Star_Cinema:
     def __init__(self) -> None:
-        self.hall_list =[]
+        self._hall_list =[]
 
     def entry_hall(self,hall):
-        self.hall_list.append(hall)
+        self._hall_list.append(hall)
 
 class Hall(Star_Cinema):
-    def __init__(self,row,cal,hallNo) -> None:
-        self.row       = row
-        self.cal       = cal 
-        self.hallNo    = hallNo
-        self.seats     = []
-        self.show_List = []
+    def __init__(self,rows,cols,hallNo) -> None:
+        self._rows       = rows
+        self._cols       = cols 
+        self._hallNo    = hallNo
+        self._seats     = {}
+        self._show_List = []
 
-        self.my_hall = row,cal,hallNo
+        self.my_hall = rows,cols,hallNo
         self.entry_hall(self.my_hall)
     
     def entry_show(self,id,movie_name,time):
-        self.id = id 
-        self.movie_name = movie_name
-        self.time = time 
+        self._id = id 
+        self._movie_name = movie_name
+        self._time = time 
 
         movie_info = (id,movie_name,time)
         self.show_List.append(movie_info)
+
+        self.seats =[]
+        for i in range(self.rows):
+            row = []
+            for j in range(self.cols):
+                row.append(0)
+            self.seats.append(row)
+
+        self._seats[self._id] = self.seats
+
+
+
+my_hall2 = Hall(3,3,3232)
+
+hallSets = my_hall2._seats
+
+for set in hallSets:
+    print(set)
