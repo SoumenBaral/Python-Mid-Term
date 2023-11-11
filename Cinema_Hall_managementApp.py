@@ -1,5 +1,5 @@
 class Star_Cinema:
-     # Class Attribute 
+    
     __hall_list = []
 
     def entry_hall(self,hall):
@@ -25,9 +25,7 @@ class Hall(Star_Cinema):
         self._show_List.append(enter_show)
 
         self.seats = [[0 for i in range(self._cols)] for j in range(self._rows)]
-        self._seats[self._id] = self.seats #Make a key with id to the attribute seats and value will be the 2d list.
-
-# This work for the Q.No:4
+        self._seats[self._id] = self.seats 
 
     def book_seats(self,id,seatsForBooking):
         try:
@@ -82,13 +80,45 @@ class Hall(Star_Cinema):
 
 
             
-        
-
-
 AnandaCinemaHall  = Hall(8,8,1110)
-AnandaCinemaHall.entry_show("101","Buktafitta jay" ,"11.00 AM")
+AnandaCinemaHall.entry_show("101","Bukta Faitta jay" ,"11.00 AM")
 AnandaCinemaHall.entry_show("110","Bedar maye josna","12.00 PM")
 AnandaCinemaHall.entry_show("111","Bostir chayle Pocha ", "1.00 Am")
 AnandaCinemaHall.entry_show("1000","Murder 2.O ", "2.0 AM")
 
-AnandaCinemaHall.view_available_seats(1010)
+
+while True:
+    print("\n WellCome to AnandaCinemaHall \n ")
+
+    print("*****************************")
+    
+    print("Choose Option form here:")
+    print("1. View available movies for today")
+    print("2. View available seats")
+    print("3. Book Ticket")
+    print("4.Exit")
+
+    n = int(input("Enter Option:"))
+
+    if n == 1:
+        print("\n Movie list and It's timing ::\n")
+        AnandaCinemaHall.view_show_list()
+    
+    elif n == 2:
+        Id = str(input("Give the Movie Id:"))
+        print(" : Available seats :") 
+        AnandaCinemaHall.view_available_seats(Id)
+    elif n == 3:
+        NId = str(input("Give a movie  Id that you want to watch :"))
+        NumberOfSeat = int(input("How many seats you want to book:"))
+        SeatNumbers = []
+        while NumberOfSeat > 0:
+            rowNumber = int(input("Give row number :"))
+            colNumber = int(input("Give col number :"))
+            SeatNumbers.append((rowNumber,colNumber))
+            NumberOfSeat-=1
+        AnandaCinemaHall.book_seats(NId,SeatNumbers) 
+        
+    elif n == 4:
+        print("Thank you for visiting us , Come Again!")
+        break 
