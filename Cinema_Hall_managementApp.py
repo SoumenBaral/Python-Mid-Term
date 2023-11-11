@@ -62,7 +62,23 @@ class Hall(Star_Cinema):
         except:       
             print(f'Error is {ValueError} ,  Please Provide valid information')
 
+    def  view_show_list(self):
+        for show in self._show_List:
+             print(f"\n{show[1]} is Available on ID:({show[0]}) On {show[2]}\n")
+
+    def view_available_seats(self,show_id):
+        get = False
+        for show in self._show_List:
+            if id  == show[0]:
+                get = True
+                break
+        if get ==True:
+            raise ValueError("Id not found")
+        self.BookingId = self._seats[show_id]
+        for r in range (0,self._rows)
         
+
+
 
 
 
