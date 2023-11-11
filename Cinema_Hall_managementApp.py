@@ -33,8 +33,35 @@ class Hall(Star_Cinema):
 
         self._seats[self._id] = self.seats
 
-    def book_seats(self,id,seatForBooking):
-        self.id = id
+    def book_seats(self,id,seatsForBooking):
+        try:
+            get = False
+            for show in self._show_List:
+                if id  == show[0]:
+                    get = True
+                    break
+            if get ==True:
+                raise ValueError("Id not found")
+            for single_set in seatsForBooking:
+                row,col = single_set
+
+                if 0<row>self._rows and 0 <col>self._cols:
+                    raise ValueError("Invalid Seat ")
+                
+                self.BookingId = self._seats[id]
+                if self.BookingId[row][col] == 1:
+                    raise ValueError("This seat already Booked ")
+                
+                self.BookingId[row][col] = 1
+
+                print("Welcome to our cinematic World,Thank you for Booking")
+                print(f"Your Seat Number : {row,col}")
+
+            
+
+        except:       
+            print(f'Error is {ValueError} ,  Please Provide valid information')
+
         
 
 
