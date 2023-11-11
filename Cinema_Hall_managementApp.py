@@ -33,6 +33,10 @@ class Hall(Star_Cinema):
 
         self._seats[self._id] = self.seats
 
+    def book_seats(self,id,seatForBooking):
+        self.id = id
+        
+
 
 
 my_hall2 = Hall(3,3,3232)
